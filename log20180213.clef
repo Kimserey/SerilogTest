@@ -1,0 +1,3 @@
+{"@t":"2018-02-13T02:40:27.4231297Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}
+{"@t":"2018-02-13T02:40:27.4957188Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}
+{"@t":"2018-02-13T02:40:27.5146670Z","@mt":"Logged on user {@User}","User":{"Name":"Nick","Id":"nblumhardt"},"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}

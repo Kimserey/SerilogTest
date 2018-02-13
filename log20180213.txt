@@ -1,0 +1,9 @@
+2018-02-13 10:07:51.134 +08:00 [INF] Hello, world!
+2018-02-13 10:08:06.254 +08:00 [INF] Hello, world!
+2018-02-13 10:08:06.327 +08:00 [DBG] Processing item 10 of 999
+2018-02-13 10:09:16.160 +08:00 [INF] Hello, world!
+2018-02-13 10:09:16.237 +08:00 [INF] Processing item 10 of 999
+2018-02-13 10:09:16.266 +08:00 [INF] Logged on user {"Name":"Nick","Id":"nblumhardt"}
+2018-02-13 10:09:32.576 +08:00 [INF] Hello, world!
+2018-02-13 10:09:32.641 +08:00 [INF] Processing item 10 of 999
+2018-02-13 10:09:32.659 +08:00 [INF] Logged on user {"Name":"Nick","Id":"nblumhardt"}

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using Serilog.Context;
+using Serilog.Formatting.Compact;
 
 namespace SerilogTest
 {
@@ -13,12 +15,21 @@ namespace SerilogTest
                 .Build();
 
             var logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 3)
+                .Enrich.FromLogContext()
+                .Enrich.WithThreadId()
+                .Enrich.WithMachineName()
+                .Enrich.WithProperty("X", "Demo")
+                .WriteTo.Console()
+                .WriteTo.File(new CompactJsonFormatter(), "log.clef", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 3)
                 .CreateLogger();
 
-            logger.Information("Hello, world!");
-            
+            using (LogContext.PushProperty("hehe", "hoho"))
+                logger.Information("Hello, world!");
+
+            var itemNumber = 10;
+            var itemCount = 999;
+            logger.Information("Processing item {ItemNumber} of {ItemCount}", itemNumber, itemCount);
+
             Console.WriteLine("Hello World!");
         }
     }
