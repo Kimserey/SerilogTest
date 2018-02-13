@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Text;
 using Microsoft.Extensions.Configuration;
+using Murmur;
 using Serilog;
 using Serilog.Context;
+using Serilog.Core;
+using Serilog.Events;
 using Serilog.Formatting.Compact;
 
 namespace SerilogTest
@@ -19,8 +23,9 @@ namespace SerilogTest
                 .Enrich.WithThreadId()
                 .Enrich.WithMachineName()
                 .Enrich.WithProperty("X", "Demo")
-                .WriteTo.Console()
+                .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm:ss} [{EventType:x8} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .WriteTo.File(new CompactJsonFormatter(), "log.clef", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 3)
+                .WriteTo.AzureTableStorage("UseDevelopmentStorage=true;")
                 .CreateLogger();
 
             using (LogContext.PushProperty("hehe", "hoho"))

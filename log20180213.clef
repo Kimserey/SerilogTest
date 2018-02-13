@@ -1,3 +1,11 @@
 {"@t":"2018-02-13T02:40:27.4231297Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}
 {"@t":"2018-02-13T02:40:27.4957188Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}
 {"@t":"2018-02-13T02:40:27.5146670Z","@mt":"Logged on user {@User}","User":{"Name":"Nick","Id":"nblumhardt"},"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EnvironmentUserName":"DESKTOP-I8R7QHH\\Kim Serey","X":"Demo"}
+{"@t":"2018-02-13T02:59:02.5282737Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":3224780355,"X":"Demo"}
+{"@t":"2018-02-13T02:59:02.6390107Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":1927587515,"X":"Demo"}
+{"@t":"2018-02-13T02:59:17.1559607Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":3224780355,"X":"Demo"}
+{"@t":"2018-02-13T02:59:17.2378260Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":1927587515,"X":"Demo"}
+{"@t":"2018-02-13T02:59:39.9653718Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":3224780355,"X":"Demo"}
+{"@t":"2018-02-13T02:59:40.0525605Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","EventType":1927587515,"X":"Demo"}
+{"@t":"2018-02-13T03:10:57.7090869Z","@mt":"Hello, world!","hehe":"hoho","ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","X":"Demo"}
+{"@t":"2018-02-13T03:10:57.9131844Z","@mt":"Processing item {ItemNumber} of {ItemCount}","ItemNumber":10,"ItemCount":999,"ThreadId":1,"MachineName":"DESKTOP-I8R7QHH","X":"Demo"}
