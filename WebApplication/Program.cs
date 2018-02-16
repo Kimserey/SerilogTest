@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
-using Serilog.Events;
-using System;
 
-namespace LogServer
+namespace WebApplication
 {
     public class Program
     {

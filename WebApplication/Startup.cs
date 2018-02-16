@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reactive.Subjects;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace LogServer
+namespace WebApplication
 {
     public class Startup
     {
-        public static Subject<string> channel = new Subject<string>();
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,8 +32,7 @@ namespace LogServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<ServerSentEventMiddleware>();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
     }
 }

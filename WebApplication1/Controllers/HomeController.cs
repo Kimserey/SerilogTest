@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace WebApplication1.Controllers
+namespace LogServer.Controllers
 {
     public class HomeController: Controller
     {
@@ -16,13 +16,6 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult Post()
-        {
-            var message = "Hello world";
-            _logger.LogInformation(message);
-            return Ok();
         }
     }
 }

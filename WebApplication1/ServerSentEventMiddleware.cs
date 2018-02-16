@@ -3,7 +3,7 @@ using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1
+namespace LogServer
 {
     public class ServerSentEventMiddleware
     {
