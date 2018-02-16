@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Serilog.Context;
 
 namespace WebApplication1.Controllers
 {
-    [Route("home")]
-    public class HomeController : Controller
+    public class HomeController: Controller
     {
         private ILogger<HomeController> _logger;
 
@@ -24,13 +18,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        [HttpPost]
-        public string Post()
+        public IActionResult Post()
         {
             var message = "Hello world";
-            Startup.channel.OnNext(message);
             _logger.LogInformation(message);
-            return "value";
+            return Ok();
         }
     }
 }

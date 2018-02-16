@@ -21,7 +21,10 @@ namespace WebApplication1
                 var response = context.Response;
                 response.Headers.Add("Content-Type", "text/event-stream");
 
-                var sub = Startup.channel.Subscribe(async msg => await response.WriteAsync($"data:[{DateTime.Now}] {msg}\n\n"));
+                var sub = Startup.channel.Subscribe(async msg =>
+                {
+                    await response.WriteAsync($"data:[{DateTime.Now}] {msg}\n\n");
+                });
 
                 context.RequestAborted.WaitHandle.WaitOne();
 
