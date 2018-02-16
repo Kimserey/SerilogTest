@@ -1,24 +1,58 @@
 ﻿<html>
 <head>
-    <title>Hello world</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Log Server</title>
+    <style>
+        body {
+            background-color: #193F47;
+            color: white;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 </head>
 <body>
-    <ul id="list"></ul>
+    <div id="logs" class="content-fluid p-1"></div>
     <script>
+        const badge = level => {
+            switch (level) {
+                case 'Fatal':
+                case 'Error':
+                    return '<span class="badge badge-danger">' + level + '</span>';
+                case 'Warning':
+                    return '<span class="badge badge-warning">' + level + '</span>';
+                case 'Information':
+                    return '<span class="badge badge-info">' + level + '</span>';
+                default:
+                    return '<span class="badge badge-secondary">' + level + '</span>';
+            };
+        }
+
+        const template = data => {
+            const t = '<div class="row">'
+                + '<div class="col-md-2">'
+                + '<span class="font-weight-light mr-3">' + moment(data.Timestamp).format('LTS') + '</span>'
+                + badge(data.Level)
+                + '</div>'
+                + '<div class="col-md-10">' + data.RenderedMessage + '</div>'
+                + '</div>'.trim();
+
+            var template = document.createElement('template');
+            template.innerHTML = t;
+            return template.content.firstChild;
+        }
+
         var evtSource = new EventSource('sse');
         console.log(evtSource.readyState);
         console.log(evtSource.url);
-        var eventList = document.getElementById('list');
+        var eventList = document.getElementById('logs');
 
         evtSource.onopen = function () {
             console.log("Connection to server opened.");
         };
         evtSource.onmessage = function (e) {
-            console.log("Received", e.data);
-            var newElement = document.createElement("li");
-            newElement.textContent = e.data;
-            eventList.appendChild(newElement);
+            eventList.appendChild(template(JSON.parse(e.data)));
         }
+
         evtSource.onerror = function () {
             console.log("EventSource failed.");
         };
