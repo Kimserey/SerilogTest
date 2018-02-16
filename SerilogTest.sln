@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SerilogTest", "SerilogTest\SerilogTest.csproj", "{D201346B-C045-42A0-9CC1-94D311AB8B69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogServer", "WebApplication1\LogServer.csproj", "{F7B51EEE-9131-4BA5-AA26-5C559935043D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogServer", "LogServer\LogServer.csproj", "{F7B51EEE-9131-4BA5-AA26-5C559935043D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{A34687D9-1C90-4234-BD29-F05994FB2E38}"
 EndProject
