@@ -24,10 +24,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost]
+        public string Post()
         {
-            _logger.LogInformation("Hello world");
+            var message = "Hello world";
+            Startup.channel.OnNext(message);
+            _logger.LogInformation(message);
             return "value";
         }
     }
