@@ -8,26 +8,26 @@ using Serilog.Context;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("home")]
+    public class HomeController : Controller
     {
-        private ILogger<ValuesController> _logger;
+        private ILogger<HomeController> _logger;
 
-        public ValuesController(ILogger<ValuesController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Index()
         {
-            _logger.LogInformation("Hello world");
-            return new string[] { "value1", "value2" };
+            return View();
         }
 
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            _logger.LogInformation("Hello world");
             return "value";
         }
     }
