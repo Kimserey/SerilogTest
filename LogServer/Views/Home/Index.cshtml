@@ -55,31 +55,31 @@
     </div>
     <ul id="logs" class="content-fluid p-1"></ul>
     <script>
-        const badge = level => {
-            switch (level) {
-                case 'Fatal':
-                case 'Error':
-                    return '<span class="badge level badge-danger mr-2">' + level + '</span>';
-                case 'Warning':
-                    return '<span class="badge level badge-warning mr-2">' + level + '</span>';
-                case 'Information':
-                    return '<span class="badge level badge-info mr-2">' + level + '</span>';
-                default:
-                    return '<span class="badge level badge-secondary mr-2">' + level + '</span>';
-            };
-        }
-
-        const properties = data => {
-            return Object.keys(data.Properties).reduce(function (previous, key) {
-                if (!data.Properties[key])
-                    return previous;
-
-                return previous + '<span class="badge badge-light mb-1 mr-1">' + key + ': ' + data.Properties[key] + '</span>';
-            }, '');
-        }
-
         const template = data => {
-            const t = '<li class="row">'
+            const badge = level => {
+                switch (level) {
+                    case 'Fatal':
+                    case 'Error':
+                        return '<span class="badge level badge-danger mr-2">' + level + '</span>';
+                    case 'Warning':
+                        return '<span class="badge level badge-warning mr-2">' + level + '</span>';
+                    case 'Information':
+                        return '<span class="badge level badge-info mr-2">' + level + '</span>';
+                    default:
+                        return '<span class="badge level badge-secondary mr-2">' + level + '</span>';
+                };
+            };
+
+            const properties = data => {
+                return Object.keys(data.Properties).reduce(function (previous, key) {
+                    if (!data.Properties[key])
+                        return previous;
+
+                    return previous + '<span class="badge badge-light mb-1 mr-1">' + key + ': ' + data.Properties[key] + '</span>';
+                }, '');
+            };
+
+            const html = '<li class="row">'
                 + '<div class="col-sm-2">'
                 + '<span class="time font-weight-light mr-2">' + moment(data.Timestamp).format('LTS') + '</span>'
                 + badge(data.Level)
@@ -92,28 +92,25 @@
                 + '</li>'.trim();
 
             var template = document.createElement('template');
-            template.innerHTML = t;
+            template.innerHTML = html;
             return template.content.firstChild;
-        }
-
-        var evtSource = new EventSource('sse');
-        console.log(evtSource.readyState);
-        console.log(evtSource.url);
-        var eventList = document.getElementById('logs');
-        var offlineWarning = document.getElementById('offline');
-
-        evtSource.onopen = function () {
-            offlineWarning.hidden = true;
         };
 
-        evtSource.onmessage = function (e) {
-            eventList.appendChild(template(JSON.parse(e.data)));
+        const hideWarning = warning => () => warning.hidden = true;
+
+        const showWarning = warning => () => warning.hidden = false;
+
+        const appendChild = list => e => { 
+            list.appendChild(template(JSON.parse(e.data)));
             document.body.scrollTop = document.body.scrollHeight;
-        }
-
-        evtSource.onerror = function () {
-            offlineWarning.hidden = false;
         };
+
+        var ev = new EventSource('sse');
+        var warning = document.getElementById('offline');
+        var list = document.getElementById('logs');
+        ev.onopen = hideWarning(warning);
+        ev.onerror = showWarning(warning);
+        ev.onmessage = appendChild(list);
     </script>
 </body>
 </html>
