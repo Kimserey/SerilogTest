@@ -3,12 +3,8 @@
     <title>Hello world</title>
 </head>
 <body>
-    SSE
-    <button id="btn">Close Connection</button>
     <ul id="list"></ul>
     <script>
-        var button = document.getElementById('btn');
-
         var evtSource = new EventSource('sse');
         console.log(evtSource.readyState);
         console.log(evtSource.url);
@@ -20,16 +16,12 @@
         evtSource.onmessage = function (e) {
             console.log("Received", e.data);
             var newElement = document.createElement("li");
-            newElement.textContent = "message: " + e.data;
+            newElement.textContent = e.data;
             eventList.appendChild(newElement);
         }
         evtSource.onerror = function () {
             console.log("EventSource failed.");
         };
-        button.onclick = function () {
-            console.log('Connection closed');
-            evtSource.close();
-        }
     </script>
 </body>
 </html>

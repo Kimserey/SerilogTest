@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Reactive.Subjects;
 
 namespace LogServer
 {
     public class Startup
     {
-        public static Subject<string> channel = new Subject<string>();
+        public static Subject<IEnumerable<LogEventViewModel>> channel = new Subject<IEnumerable<LogEventViewModel>>();
 
         public Startup(IConfiguration configuration)
         {

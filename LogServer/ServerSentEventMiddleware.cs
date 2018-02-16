@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -21,9 +22,12 @@ namespace LogServer
                 var response = context.Response;
                 response.Headers.Add("Content-Type", "text/event-stream");
 
-                var sub = Startup.channel.Subscribe(async msg =>
+                var sub = Startup.channel.Subscribe(async events =>
                 {
-                    await response.WriteAsync($"data:[{DateTime.Now}] {msg}\n\n");
+                    foreach (var e in events)
+                    {
+                        await response.WriteAsync($"data:{JsonConvert.SerializeObject(e)}\n\n");
+                    }
                 });
 
                 context.RequestAborted.WaitHandle.WaitOne();

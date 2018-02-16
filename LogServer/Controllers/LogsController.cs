@@ -7,14 +7,10 @@ namespace LogServer.Controllers
     [Route("api/logs")]
     public class LogsController : Controller
     {
-        // Receives logs from Serilog HTTP Sink.
         [HttpPost]
-        public IActionResult Post([FromBody] object logs)
+        public IActionResult Post([FromBody] LogEventsViewModel logs)
         {
-            //foreach(var log in logs.Events)
-            //{
-            //    Startup.channel.OnNext(log.RenderedMessage);
-            //}
+            Startup.channel.OnNext(logs.Events);
             return Ok();
         }
     }
