@@ -8,7 +8,9 @@ namespace LogServer.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] LogEventsViewModel logs)
         {
-            Startup.channel.OnNext(logs.Events);
+            foreach(var e in logs.Events)
+                Startup.channel.OnNext(e);
+
             return Ok();
         }
     }

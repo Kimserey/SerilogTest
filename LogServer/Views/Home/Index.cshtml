@@ -8,6 +8,19 @@
             color: white;
         }
 
+        #logs {
+            list-style: none;
+        }
+
+            #logs li {
+                padding: .1em 0;
+                background-color: #1E545F;
+            }
+
+            #logs li:nth-child(odd) {
+                background: #193F47;
+            }
+
         .row {
             margin-bottom: .2em;
         }
@@ -18,38 +31,65 @@
             text-align: right;
         }
 
-        .badge {
+        .badge.level {
             width: 80px;
+        }
+
+        #offline {
+            color: red;
+            padding: .1em .5em;
+            font-size: 5em;
+            font-weight: 600;
+            position: absolute;
+            z-index: 100;
+            background: #193f47ad;
+            top: .5em;
+            left: .5em;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 </head>
 <body>
-    <div id="logs" class="content-fluid p-1"></div>
+    <div id="offline">
+        SERVICE IS OFFLINE
+    </div>
+    <ul id="logs" class="content-fluid p-1"></ul>
     <script>
         const badge = level => {
             switch (level) {
                 case 'Fatal':
                 case 'Error':
-                    return '<span class="badge badge-danger mr-2">' + level + '</span>';
+                    return '<span class="badge level badge-danger mr-2">' + level + '</span>';
                 case 'Warning':
-                    return '<span class="badge badge-warning mr-2">' + level + '</span>';
+                    return '<span class="badge level badge-warning mr-2">' + level + '</span>';
                 case 'Information':
-                    return '<span class="badge badge-info mr-2">' + level + '</span>';
+                    return '<span class="badge level badge-info mr-2">' + level + '</span>';
                 default:
-                    return '<span class="badge badge-secondary mr-2">' + level + '</span>';
+                    return '<span class="badge level badge-secondary mr-2">' + level + '</span>';
             };
         }
 
+        const properties = data => {
+            return Object.keys(data.Properties).reduce(function (previous, key) {
+                if (!data.Properties[key])
+                    return previous;
+
+                return previous + '<span class="badge badge-light mb-1 mr-1">' + key + ': ' + data.Properties[key] + '</span>';
+            }, '');
+        }
+
         const template = data => {
-            const t = '<div class="row">'
+            const t = '<li class="row">'
                 + '<div class="col-sm-2">'
                 + '<span class="time font-weight-light mr-2">' + moment(data.Timestamp).format('LTS') + '</span>'
                 + badge(data.Level)
                 + '<span class="font-weight-bold">' + data.Properties.Application + '</span>'
                 + '</div>'
-                + '<div class="col-sm-10">' + data.RenderedMessage + '</div>'
-                + '</div>'.trim();
+                + '<div class="col-sm-10">'
+                + '<div>' + data.RenderedMessage + '</div>'
+                + properties(data)
+                + '</div>'
+                + '</li>'.trim();
 
             var template = document.createElement('template');
             template.innerHTML = t;
@@ -60,9 +100,10 @@
         console.log(evtSource.readyState);
         console.log(evtSource.url);
         var eventList = document.getElementById('logs');
+        var offlineWarning = document.getElementById('offline');
 
         evtSource.onopen = function () {
-            console.log("Connection to server opened.");
+            offlineWarning.hidden = true;
         };
 
         evtSource.onmessage = function (e) {
@@ -71,7 +112,7 @@
         }
 
         evtSource.onerror = function () {
-            console.log("EventSource failed.");
+            offlineWarning.hidden = false;
         };
     </script>
 </body>

@@ -22,12 +22,9 @@ namespace LogServer
                 var response = context.Response;
                 response.Headers.Add("Content-Type", "text/event-stream");
 
-                var sub = Startup.channel.Subscribe(async events =>
+                var sub = Startup.channel.Subscribe(async e =>
                 {
-                    foreach (var e in events)
-                    {
-                        await response.WriteAsync($"data:{JsonConvert.SerializeObject(e)}\n\n");
-                    }
+                    await response.WriteAsync($"data:{JsonConvert.SerializeObject(e)}\n\n");
                 });
 
                 context.RequestAborted.WaitHandle.WaitOne();

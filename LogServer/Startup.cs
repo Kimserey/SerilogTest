@@ -9,7 +9,7 @@ namespace LogServer
 {
     public class Startup
     {
-        public static Subject<IEnumerable<LogEventViewModel>> channel = new Subject<IEnumerable<LogEventViewModel>>();
+        public static ReplaySubject<LogEventViewModel> channel = new ReplaySubject<LogEventViewModel>(20);
 
         public Startup(IConfiguration configuration)
         {
