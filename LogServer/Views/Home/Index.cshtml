@@ -79,6 +79,9 @@
                 }, '');
             };
 
+            const exception = data =>
+                !data.Exception ? '' : '<div class="text-warning">' + data.Exception + '</div>';
+             
             const html = '<li class="row">'
                 + '<div class="col-sm-2">'
                 + '<span class="time font-weight-light mr-2">' + moment(data.Timestamp).format('LTS') + '</span>'
@@ -87,6 +90,7 @@
                 + '</div>'
                 + '<div class="col-sm-10">'
                 + '<div>' + data.RenderedMessage + '</div>'
+                + exception(data)
                 + properties(data)
                 + '</div>'
                 + '</li>'.trim();
