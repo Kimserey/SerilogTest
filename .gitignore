@@ -322,5 +322,6 @@ ASALocalRun/
 # MSBuild Binary and Structured Log
 *.binlog
 
-# Rolling log file
+# Serilog files
 *.log
+Buffer/
