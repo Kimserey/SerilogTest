@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,13 @@ namespace LogServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(opt => {
+                    opt.Authority = "http://localhost:5000/identity";
+                    opt.ApiName = "log-api";
+                    opt.RequireHttpsMetadata = false;
+                });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -30,6 +38,7 @@ namespace LogServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
             app.UseMiddleware<ServerSentEventMiddleware>();
             app.UseMvcWithDefaultRoute();
         }

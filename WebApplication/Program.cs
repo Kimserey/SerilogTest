@@ -29,7 +29,7 @@ namespace WebApplication
                         .WriteTo.DurableHttp(
                             requestUri: "http://localhost:5500/api/logs",
                             bufferPathFormat: "Logs\\Buffer\\Buffer-{Date}.json",
-                            httpClient: new IdentityClientCredentialsHttpClient(
+                            httpClient: new OidcHttpClient(
                                 ctx.Configuration["Identity:Client"],
                                 ctx.Configuration["Secrets:WebLog"],
                                 ctx.Configuration["Identity:Authority"]));
