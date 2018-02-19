@@ -40,7 +40,7 @@ namespace LogServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseMiddleware<ServerSentEventMiddleware>();
             app.UseMvcWithDefaultRoute();
         }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 using System;
 
 namespace LogServer
@@ -16,7 +17,9 @@ namespace LogServer
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration))
+                .UseSerilog((ctx, cfg) => cfg
+                    .ReadFrom.Configuration(ctx.Configuration)
+                    .WriteTo.Console(theme: AnsiConsoleTheme.Code, outputTemplate: "[{Timestamp:HH:mm:ss.fff} {Level:u3}] {SourceContext}: {Message:lj}{NewLine}{Exception}"))
                 .Build();
     }
 }

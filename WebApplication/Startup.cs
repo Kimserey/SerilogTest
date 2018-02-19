@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics;
 
 namespace WebApplication
 {
@@ -17,6 +18,8 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            Serilog.Debugging.SelfLog.Enable(msg => Debug.WriteLine(msg));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

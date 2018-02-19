@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LogServer.Controllers
 {
-    [Authorize]
     [Route("api/logs")]
     public class LogsController : Controller
     {
